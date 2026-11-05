@@ -1,0 +1,18 @@
+
+# Fichiers de compilation
+build/
+cmake-build-*/
+CMakeFiles/
+CMakeCache.txt
+
+# Executables
+*.exe
+*.o
+*.obj
+
+# Fichiers temporaires
+*.log
+*.tmp
+
+# Configuration VS Code
+.vscode/
