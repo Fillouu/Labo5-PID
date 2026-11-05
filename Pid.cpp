@@ -137,7 +137,7 @@ double Pid::compute(double consigne, double mesure, double dt)
     }
     else
     {
-        d_ = -kd_ * (mesure - mesurePrecedente_) / dt;
+        d_ = -kd_ * (mesure  - mesurePrecedente_) / dt;
     }
 
     // Memoriser la mesure actuelle

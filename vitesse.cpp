@@ -59,7 +59,7 @@ namespace {
 
 // Votre nom, une fois. Le simulateur le recoit par la commande EQUIPE, et
 // nomme son fichier de bilan avec.
-const char* kEquipe = "equipe_a_nommer";
+const char* kEquipe = "FelixG";
 
 // Le scenario. Etape 4 : ECHELON, puis PALIERS. Etape 7 : COLLINE.
 const char* kScenario = "ECHELON";
@@ -68,9 +68,9 @@ const char* kScenario = "ECHELON";
 // reglez la vitesse. Avant le premier essai, mettez vos gains de l'etape 2.
 // Les deux scenarios sont en ligne droite, avec un depart au centre : la
 // direction y travaille peu.
-const double kDirectionKp = 0.5;
+const double kDirectionKp = 0.1;
 const double kDirectionKi = 0.0;
-const double kDirectionKd = 0.0;
+const double kDirectionKd = 0.03;
 
 // -----------------------------------------------------------------------------
 //  NE PAS CHANGER : les memes valeurs pour tous les essais et tout le groupe.
