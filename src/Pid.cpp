@@ -6,6 +6,7 @@
 // =============================================================================
 
 #include "Pid.h"
+#include <cmath>
 
 // -----------------------------------------------------------------------------
 //  FOURNI : range les gains et les bornes. La memoire part vide.
@@ -115,6 +116,7 @@ void Pid::reset()
 //  Le P, le D, la somme et les bornes : comme au TODO 1.
 // -----------------------------------------------------------------------------
 
+
 double Pid::compute(double consigne, double mesure, double dt)
 {
     // Calcul de l'erreur
@@ -122,12 +124,6 @@ double Pid::compute(double consigne, double mesure, double dt)
 
     // Calcul du terme proportionnel
     p_ = kp_ * erreur;
-
-    // Accumulation de l'erreur dans le temps
-    integrale_ += erreur * dt;
-
-    // Calcul du terme integral
-    i_ = ki_ * integrale_;
 
     // Calcul du terme derive
     if (premiereMesure_)
@@ -137,11 +133,52 @@ double Pid::compute(double consigne, double mesure, double dt)
     }
     else
     {
-        d_ = -kd_ * (mesure  - mesurePrecedente_) / dt;
+        d_ = -kd_ * (mesure - mesurePrecedente_) / dt;
     }
 
     // Memoriser la mesure actuelle
     mesurePrecedente_ = mesure;
+
+    // TODO 2 : gestion de l'anti-windup
+
+    if (antiWindup_ == AntiWindup::Band)
+    {
+        // Si l'erreur depasse la bande, vider l'integrale
+        if (std::abs(erreur) > bande_)
+        {
+            integrale_ = 0.0;
+        }
+        else
+        {
+            integrale_ += erreur * dt;
+        }
+    }
+    else if (antiWindup_ == AntiWindup::ConditionalIntegration)
+    {
+        // Calculer l'integrale candidate pour ce tic
+        double nouvelleIntegrale = integrale_ + erreur * dt;
+
+        // Calculer la commande avec cette integrale
+        double nouvelleDemande = p_ + ki_ * nouvelleIntegrale + d_;
+
+        // Verifier si l'erreur pousse davantage vers une borne
+        bool saturationHaute = (nouvelleDemande > sortieMax_ && erreur > 0.0);
+        bool saturationBasse = (nouvelleDemande < sortieMin_ && erreur < 0.0);
+
+        // Integrer seulement si l'erreur ne pousse pas vers la saturation
+        if (!saturationHaute && !saturationBasse)
+        {
+            integrale_ = nouvelleIntegrale;
+        }
+    }
+    else
+    {
+        // Mode None : accumulation normale
+        integrale_ += erreur * dt;
+    }
+
+    // Calcul du terme integral
+    i_ = ki_ * integrale_;
 
     // Additionner les trois termes
     demande_ = p_ + i_ + d_;
@@ -161,4 +198,3 @@ double Pid::compute(double consigne, double mesure, double dt)
     // Retourner la commande finale
     return sortie;
 }
-
