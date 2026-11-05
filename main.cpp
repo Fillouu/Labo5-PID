@@ -60,7 +60,7 @@ const char* kEquipe = "equipe_a_nommer";
 // Etape 2 : DROITE, puis VIRAGE, puis COURBES_FORTES.
 // Etape 8 : DROITE, puis COURBES_LEGERES pour verifier chaque reglage.
 // Aux autres etapes : DROITE.
-const char* kRoute = "DROITE";
+const char* kRoute = "VIRAGE";
 
 // La vitesse de la voiture, en km/h. Etape 8 : 30.0, puis 100.0. Aux autres
 // etapes : 60.0.
@@ -69,7 +69,7 @@ const double kVitesseKmh = 60.0;
 // L'ecart au depart, en metres : la voiture part a cote du centre (0.2 : a
 // gauche), et le regulateur doit l'y ramener.
 // 0.2 sur la ligne droite. 0.0 au virage, dans les courbes et a l'etape 3.
-const double kEcartInitialM = 0.2;
+const double kEcartInitialM = 0.0;
 
 // Etape 3 seulement : la consigne change, et la voiture change de voie.
 //   kVoieCibleM : la voie visee, en metres depuis le centre, positive a
