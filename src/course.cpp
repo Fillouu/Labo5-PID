@@ -48,31 +48,31 @@ namespace {
 
 // Votre nom, une fois. Le simulateur le recoit par la commande EQUIPE, et
 // nomme son fichier de bilan avec.
-const char* kEquipe = "equipe_a_nommer";
+const char* kEquipe = "FelixG";
 
 // Le scenario.
 // Etape 8 : PALIERS, le parcours de la fin de l'etape 4. Au choix, AUCUN : une
 // route de courbes, sans panneaux ni arrivee; la vitesse visee se change au
 // gradateur du simulateur.
 // Etape 9 : VILLAGE, AUTOROUTE, RANG ou MONTAGNE.
-const char* kScenario = "VILLAGE";
+const char* kScenario = "AUCUN";
 
 // La direction : votre table de l'etape 8. Une ligne par vitesse : la vitesse
 // en km/h, puis Kp, Ki et Kd. Les vitesses en ordre croissant. Gardez les
 // vitesses; mettez les gains que vous avez regles a chaque vitesse.
 const GainPoint kTableDirection[] = {
-    {30.0, 0.5, 0.0, 0.0},
-    {60.0, 0.5, 0.0, 0.0},    // vos gains de l'etape 2
-    {100.0, 0.5, 0.0, 0.0},
+    {30.0, 0.10, 0.0, 0.12},
+    {60.0, 0.10, 0.0, 0.03},    // vos gains de l'etape 2
+    {100.0, 0.10, 0.0, 0.04},
 };
 
 // La vitesse : vos reglages des etapes 4 et 7, les trois gains et la
 // protection du terme I. En ligne de commande : aucun, conditionnel ou bande.
 // Ici : None, ConditionalIntegration ou Band.
-const double kVitesseKp = 0.1;
-const double kVitesseKi = 0.0;
+const double kVitesseKp = 0.2;
+const double kVitesseKi = 0.005;
 const double kVitesseKd = 0.0;
-const Pid::AntiWindup kVitesseAnti = Pid::AntiWindup::None;
+const Pid::AntiWindup kVitesseAnti = Pid::AntiWindup::Band;
 
 // La rampe de l'etape 3, en metres par seconde : la consigne glisse vers la
 // voie du panneau. AUTOROUTE change de voie au chantier : a 1.0, les 3,5 m
