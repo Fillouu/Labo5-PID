@@ -62,7 +62,7 @@ namespace {
 const char* kEquipe = "FelixG";
 
 // Le scenario. Etape 4 : ECHELON, puis PALIERS. Etape 7 : COLLINE.
-const char* kScenario = "ECHELON";
+const char* kScenario = "PALIERS";
 
 // Les gains de la direction : la voiture reste sur sa voie pendant que vous
 // reglez la vitesse. Avant le premier essai, mettez vos gains de l'etape 2.
