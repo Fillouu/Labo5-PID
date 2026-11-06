@@ -55,7 +55,7 @@ const char* kEquipe = "FelixG";
 // route de courbes, sans panneaux ni arrivee; la vitesse visee se change au
 // gradateur du simulateur.
 // Etape 9 : VILLAGE, AUTOROUTE, RANG ou MONTAGNE.
-const char* kScenario = "AUCUN";
+const char* kScenario = "MONTAGNE";
 
 // La direction : votre table de l'etape 8. Une ligne par vitesse : la vitesse
 // en km/h, puis Kp, Ki et Kd. Les vitesses en ordre croissant. Gardez les
