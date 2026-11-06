@@ -131,9 +131,14 @@ double Pid::compute(double consigne, double mesure, double dt)
         d_ = 0.0;
         premiereMesure_ = false;
     }
-    else
+    else if (dt > 0.0)
     {
         d_ = -kd_ * (mesure - mesurePrecedente_) / dt;
+    }
+    else
+    {
+        // Pas de derivee si le temps est nul ou negatif
+        d_ = 0.0;
     }
 
     // Memoriser la mesure actuelle
